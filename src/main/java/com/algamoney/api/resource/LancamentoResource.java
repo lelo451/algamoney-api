@@ -82,4 +82,15 @@ public class LancamentoResource {
         List<Erro> errors = Collections.singletonList(new Erro(mensagemUsuario, messagemDesenvolvedor));
         return ResponseEntity.badRequest().body(errors);
     }
+
+    @PutMapping("/{codigo}")
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO')")
+    public ResponseEntity<Lancamento> atualizar(@PathVariable Long codigo, @Valid @RequestBody Lancamento lancamento) {
+        try {
+            Lancamento lancamentoSalvo = lancamentoService.atualizar(codigo, lancamento);
+            return ResponseEntity.ok(lancamentoSalvo);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

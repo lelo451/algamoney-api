@@ -21,6 +21,7 @@ public class Pessoa {
 
     @NotNull
     private Boolean ativo;
+    private boolean inativo;
 
     public Long getCodigo() {
         return codigo;
@@ -73,5 +74,9 @@ public class Pessoa {
     @Override
     public int hashCode() {
         return codigo != null ? codigo.hashCode() : 0;
+    }
+
+    public boolean isInativo() {
+        return inativo;
     }
 }
